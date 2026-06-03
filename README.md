@@ -10,7 +10,7 @@ Everything that makes this portfolio _yours_ lives in two files: **`src/app/_con
 
 ## Live demo
 
-> Replace this with your own URL after deploying.
+> [https:](https://oguzgur.com)
 
 ---
 
