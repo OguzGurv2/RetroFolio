@@ -595,7 +595,3 @@ Both desktop and mobile store a timestamp in `localStorage` when login completes
 On the next visit, if the timestamp is within 10 minutes, the boot animation is skipped and the user lands directly on the home view.
 
 ---
-
-## License
-
-MIT
