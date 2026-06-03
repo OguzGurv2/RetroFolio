@@ -10,7 +10,7 @@ Everything that makes this portfolio _yours_ lives in two files: **`src/app/_con
 
 ## Live demo
 
-> [https:](https://oguzgur.com)
+> [oguzgur.com](https://oguzgur.com)
 
 ---
 
