@@ -1,4 +1,9 @@
+<div align="center">
+  <img src="public/favicon/android-chrome-192x192.png" width="192" alt="Retro OS Portfolio logo" />
+
 # Retro OS Portfolio
+
+</div>
 
 A retro-cyberpunk developer portfolio built with **Next.js 15**, **Three.js**, and **Tailwind CSS v4**.
 
@@ -8,9 +13,17 @@ Everything that makes this portfolio _yours_ lives in two files: **`src/app/_con
 
 ---
 
-## Live demo
+### Desktop
 
-> Replace this with your own URL after deploying.
+The desktop experience opens with a scroll-driven 125-frame intro animation, followed by a retro boot log and credential-typing login sequence. Once authenticated, you land on a fully interactive OS simulation — draggable and closeable windows rendered on an offscreen 2D canvas and composited through a WebGL CRT post-processing shader (barrel distortion, scanlines, chromatic aberration, vignette, and flicker).
+
+![Desktop demo](public/web.gif)
+
+### Mobile
+
+On mobile, a splash screen with a progress bar plays first. The main view is a cyberpunk SPA — no page reloads, no sub-routes. A bottom navigation bar switches between sections, each rendered as animated cards. A glitching clock widget and a status top bar with the OS name and version complete the UI.
+
+![Mobile demo](public/mobile.gif)
 
 ---
 
@@ -122,14 +135,14 @@ Open **`src/app/_config/owner.ts`** and fill in every field. Every comment expla
 
 These files cannot be driven from `owner.ts` — replace them manually before going live.
 
-**Favicons** — generate all sizes at [realfavicongenerator.net](https://realfavicongenerator.net) and drop the files into `/public/`:
+**Favicons** — generate all sizes at [realfavicongenerator.net](https://realfavicongenerator.net) and drop the files into `/public/favicon/`:
 
 ```
-/public/favicon-16x16.png
-/public/favicon-32x32.png
-/public/apple-touch-icon.png
-/public/android-chrome-192x192.png
-/public/android-chrome-512x512.png
+/public/favicon/favicon-16x16.png
+/public/favicon/favicon-32x32.png
+/public/favicon/apple-touch-icon.png
+/public/favicon/android-chrome-192x192.png
+/public/favicon/android-chrome-512x512.png
 ```
 
 **Social preview image** — design a 1200 × 630 px image in any editor and save it as:

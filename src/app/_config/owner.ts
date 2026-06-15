@@ -20,11 +20,11 @@
 //  These are assets that cannot be driven from this file — replace them in
 //  your file system before going live:
 //
-//    /public/favicon-16x16.png          ┐
-//    /public/favicon-32x32.png          │  Your favicon set.
-//    /public/apple-touch-icon.png       │  Generate all sizes at:
-//    /public/android-chrome-192x192.png │  https://realfavicongenerator.net
-//    /public/android-chrome-512x512.png ┘
+//    /public/favicon/favicon-16x16.png          ┐
+//    /public/favicon/favicon-32x32.png          │  Your favicon set.
+//    /public/favicon/apple-touch-icon.png       │  Generate all sizes at:
+//    /public/favicon/android-chrome-192x192.png │  https://realfavicongenerator.net
+//    /public/favicon/android-chrome-512x512.png ┘
 //
 //    /public/render/Sequence5_000.webp  ┐
 //    /public/render/Sequence5_001.webp  │  The desktop intro animation.
