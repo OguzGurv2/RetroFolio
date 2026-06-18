@@ -15,14 +15,14 @@
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-00ff85?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.2.0-00ff85?style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-1.1.0-00ff85?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-00ff85?style=flat-square)](https://github.com/OguzGurv2/RetroFolio/pulls)
 
 </div>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=00ff85&height=80&section=header" width="100%"/>
 
-## What's New? — v1.2.0
+## What's New? — v1.1.0
 
 > **Multi-language support is here.** The entire UI now responds to locale changes instantly — windows, nav labels, boot sequence, login animation, and the intro hint all switch without a page reload. A subtle fixed toggle appears in the top-right corner, but **only when you configure 2 or more languages** — single-language setups see nothing.
 
@@ -452,7 +452,7 @@ Changing `ACCENT` and `BG` there propagates to the desktop canvas. For the mobil
 > When you add a new feature, add a row to the [Features](#features) table **and** an entry here before merging.
 
 <details>
-<summary><b>v1.2.0</b> — Multi-language support</summary>
+<summary><b>v1.1.0</b> — Multi-language support</summary>
 
 **Released:** 2026-06-18
 
@@ -469,17 +469,6 @@ Changing `ACCENT` and `BG` there propagates to the desktop canvas. For the mobil
 1. Fill in `WINDOWS_TR` (or your locale block) in `portfolio.ts`
 2. Add your locale to `AVAILABLE_LOCALES`
 3. The toggle appears automatically — no component changes needed
-
-</details>
-
-<details>
-<summary><b>v1.1.0</b> — Window state persistence</summary>
-
-**Released:** earlier
-
-- Desktop window positions and open/close state saved to `localStorage`
-- State key namespaced to `OWNER.osName` to prevent cross-fork conflicts
-- Restored automatically on the next visit within the same browser
 
 </details>
 
@@ -554,7 +543,7 @@ User visits site
 
 <div align="center">
 
-**Built with `</3` and too much caffeine.**
+**Built with `<3` and too much caffeine.**
 
 [![Star on GitHub](https://img.shields.io/github/stars/OguzGurv2/RetroFolio?style=social)](https://github.com/OguzGurv2/RetroFolio)
 
