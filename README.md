@@ -22,6 +22,21 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=00ff85&height=80&section=header" width="100%"/>
 
+## What's New? — v1.2.0
+
+> **Multi-language support is here.** The entire UI now responds to locale changes instantly — windows, nav labels, boot sequence, login animation, and the intro hint all switch without a page reload. A subtle fixed toggle appears in the top-right corner, but **only when you configure 2 or more languages** — single-language setups see nothing.
+
+To enable it, fill in a second content block in `portfolio.ts` and add your locale to `AVAILABLE_LOCALES`:
+
+```ts
+// src/app/_config/portfolio.ts
+export const AVAILABLE_LOCALES: Locale[] = ["en", "tr"]; // toggle appears automatically
+```
+
+That's it — no component changes needed. See the [Changelog](#changelog) for full details.
+
+---
+
 A retro-cyberpunk developer portfolio built with **Next.js 15**, **Three.js**, and **Tailwind CSS v4**. Fork it, fill in two config files, and deploy — your portfolio goes live in minutes.
 
 Desktop visitors get a fully interactive OS simulation — draggable windows, a taskbar, a boot/login sequence, and a WebGL CRT post-processing shader. Mobile visitors get a smooth SPA-style cyberpunk UI with animated transitions, a bottom nav, and a glitching clock widget.
