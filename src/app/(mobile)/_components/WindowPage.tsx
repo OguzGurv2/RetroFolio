@@ -1,4 +1,5 @@
-import { WINDOWS, type WindowTemplate } from "@/_config/portfolio";
+import { getWindows, type WindowTemplate } from "@/_config/portfolio";
+import { useLocale } from "@/_i18n/LocaleContext";
 import Link from "next/link";
 import { sendGAEvent } from "@next/third-parties/google";
 import { glitchIdleStyle } from "@/(mobile)/_constants/ui";
@@ -46,8 +47,8 @@ function SectionCard({ section, index }: { section: WindowTemplate["sections"][n
 }
 
 export function WindowContent({ id }: { id: string }) {
-  // Safe to assert: callers always pass an id that exists in WINDOWS (ViewId values map 1:1).
-  const win = WINDOWS.find((w) => w.id === id)!;
+  const { locale } = useLocale();
+  const win = getWindows(locale).find((w) => w.id === id)!;
   return (
     <div className="cyber-panel mb-3">
       <div className="cyber-panel-header mb-2">

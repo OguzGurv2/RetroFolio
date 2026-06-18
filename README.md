@@ -1,84 +1,112 @@
 <div align="center">
-  <img src="public/favicon/android-chrome-192x192.png" width="192" alt="Retro OS Portfolio logo" />
 
-# Retro OS Portfolio
+<img src="public/favicon/android-chrome-192x192.png" width="120" alt="RetroFolio logo" />
+
+<br/>
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=VT323&size=36&duration=3000&pause=1000&color=00FF85&center=true&vCenter=true&width=640&lines=Retro+OS+Portfolio;Build+Your+CRT+Portfolio;One+Config+File+Away;Open+Source+%26+Free)](https://github.com/OguzGurv2/RetroFolio)
+
+<br/>
+
+[![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript_5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white)](https://threejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-00ff85?style=flat-square)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.2.0-00ff85?style=flat-square)]()
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-00ff85?style=flat-square)](https://github.com/OguzGurv2/RetroFolio/pulls)
 
 </div>
 
-A retro-cyberpunk developer portfolio built with **Next.js 15**, **Three.js**, and **Tailwind CSS v4**.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=00ff85&height=80&section=header" width="100%"/>
 
-Desktop visitors get a fully interactive OS simulation — draggable windows, a taskbar, a boot/login sequence, and a CRT post-processing shader. Mobile visitors get a smooth SPA-style cyberpunk UI with animated transitions, a bottom navigation bar, and a glitching clock widget.
+A retro-cyberpunk developer portfolio built with **Next.js 15**, **Three.js**, and **Tailwind CSS v4**. Fork it, fill in two config files, and deploy — your portfolio goes live in minutes.
 
-Everything that makes this portfolio _yours_ lives in two files: **`src/app/_config/owner.ts`** and **`src/app/_config/portfolio.ts`**. No component code needs to be touched.
+Desktop visitors get a fully interactive OS simulation — draggable windows, a taskbar, a boot/login sequence, and a WebGL CRT post-processing shader. Mobile visitors get a smooth SPA-style cyberpunk UI with animated transitions, a bottom nav, and a glitching clock widget.
 
----
-
-### Desktop
-
-The desktop experience opens with a scroll-driven 125-frame intro animation, followed by a retro boot log and credential-typing login sequence. Once authenticated, you land on a fully interactive OS simulation — draggable and closeable windows rendered on an offscreen 2D canvas and composited through a WebGL CRT post-processing shader (barrel distortion, scanlines, chromatic aberration, vignette, and flicker).
-
-![Desktop demo](public/web.gif)
-
-### Mobile
-
-On mobile, a splash screen with a progress bar plays first. The main view is a cyberpunk SPA — no page reloads, no sub-routes. A bottom navigation bar switches between sections, each rendered as animated cards. A glitching clock widget and a status top bar with the OS name and version complete the UI.
-
-![Mobile demo](public/mobile.gif)
+> **Everything that makes this portfolio _yours_ lives in two files:** `src/app/_config/owner.ts` and `src/app/_config/portfolio.ts`. No component code needs to be touched.
 
 ---
 
-## Table of contents
+## Table of Contents
 
+- [Demo](#demo)
 - [Features](#features)
-- [Tech stack](#tech-stack)
-- [Getting started](#getting-started)
-- [Making it your own](#making-it-your-own)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Making It Your Own](#making-it-your-own)
   - [Step 1 — Fill in owner.ts](#step-1--fill-in-ownerts)
   - [Step 2 — Replace public assets](#step-2--replace-public-assets)
   - [Step 3 — Add your content in portfolio.ts](#step-3--add-your-content-in-portfoliots)
 - [Versioning](#versioning)
 - [Deploying to Vercel](#deploying-to-vercel)
-- [Project structure](#project-structure)
-- [Architecture notes](#architecture-notes)
-- [Customising the theme](#customising-the-theme)
+- [Project Structure](#project-structure)
+- [Architecture Notes](#architecture-notes)
+- [Customising the Theme](#customising-the-theme)
+- [Changelog](#changelog)
+- [Roadmap](#roadmap)
 - [License](#license)
+
+---
+
+## Demo
+
+<table>
+  <tr>
+    <td align="center"><b>Desktop</b></td>
+    <td align="center"><b>Mobile</b></td>
+  </tr>
+  <tr>
+    <td><img src="public/web.gif" alt="Desktop demo" /></td>
+    <td><img src="public/mobile.gif" alt="Mobile demo" /></td>
+  </tr>
+</table>
+
+**Desktop** — scroll-driven 125-frame intro animation → retro boot log → credential-typing login sequence → fully interactive draggable OS rendered on a 2D canvas composited through a WebGL CRT shader (barrel distortion, scanlines, chromatic aberration, vignette, flicker).
+
+**Mobile** — splash screen with progress bar → cyberpunk SPA. Bottom nav, animated cards, glitching clock widget, status top bar.
 
 ---
 
 ## Features
 
-| Feature                      | Description                                                                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| **CRT shader**               | WebGL post-processing: barrel distortion, scanlines, chromatic aberration, vignette, flicker, rounded-corner masking            |
-| **Desktop OS simulation**    | Draggable, closeable windows drawn on an offscreen 2D canvas, composited through the CRT material each frame                    |
-| **Intro sequence**           | 125-frame WebP image sequence played back on a `<canvas>` with scroll-driven autoplay and hardware-accelerated fade             |
-| **Login animation**          | Retro boot log + credential-typing animation before the desktop appears                                                         |
-| **Adaptive routing**         | Root page detects viewport at the edge (Vercel middleware) and rewrites to `/d` or `/m` — zero JS shipped for the unused branch |
-| **Session persistence**      | Boot animation is skipped for 10 minutes after the user has already seen it                                                     |
-| **Window state persistence** | Desktop window positions and open/close state are saved to `localStorage` and restored on the next visit                        |
-| **Mobile SPA**               | Fully client-side section navigation — no sub-routes, no page reloads                                                           |
-| **Versioning**               | Pin a version string manually in `owner.ts`, or configure auto-versioning from commit count via the GitHub Compare API          |
-| **SEO**                      | JSON-LD Person schema, OpenGraph tags, Twitter card, hidden crawlable footer (because the desktop renders on `<canvas>`)        |
-| **Web manifest**             | Dynamic `manifest.ts` — app name and short name come from `owner.ts` automatically                                              |
-| **Analytics**                | Optional Google Analytics 4, Vercel Analytics, and Vercel Speed Insights — all configurable or removable                        |
+| Feature | Description |
+|---|---|
+| **CRT shader** | WebGL post-processing: barrel distortion, scanlines, chromatic aberration, vignette, flicker, rounded-corner masking |
+| **Desktop OS simulation** | Draggable, closeable windows drawn on an offscreen 2D canvas, composited through the CRT material each frame |
+| **Intro sequence** | 125-frame WebP image sequence played back on a `<canvas>` with scroll-driven autoplay and hardware-accelerated fade |
+| **Login animation** | Retro boot log + credential-typing animation before the desktop appears |
+| **Adaptive routing** | Root page detects viewport at the edge (Vercel middleware) and rewrites to `/d` or `/m` — zero JS shipped for the unused branch |
+| **Session persistence** | Boot animation skipped for 10 minutes after the user has already seen it |
+| **Window state persistence** | Desktop window positions and open/close state saved to `localStorage` and restored on the next visit |
+| **Mobile SPA** | Fully client-side section navigation — no sub-routes, no page reloads |
+| **Multi-language support** | Built-in locale system (React Context + `localStorage`) — add Turkish, English, or any language by filling in a second content block in `portfolio.ts`. A subtle fixed toggle appears only when 2+ languages are configured. The entire UI responds: windows, nav, boot sequence, login animation, and intro hint all switch instantly |
+| **Versioning** | Pin a version string manually in `owner.ts`, or configure auto-versioning from commit count via the GitHub Compare API |
+| **SEO** | JSON-LD Person schema, OpenGraph tags, Twitter card, hidden crawlable footer (because the desktop renders on `<canvas>`) |
+| **Web manifest** | Dynamic `manifest.ts` — app name and short name come from `owner.ts` automatically |
+| **Analytics** | Optional Google Analytics 4, Vercel Analytics, and Vercel Speed Insights — all configurable or removable |
+
+> **Contributing a new feature?** Add a row to this table and a version entry to the [Changelog](#changelog) before opening your PR.
 
 ---
 
-## Tech stack
+## Tech Stack
 
-| Layer        | Technology                                                               |
-| ------------ | ------------------------------------------------------------------------ |
-| Framework    | [Next.js 15](https://nextjs.org/) (App Router, TypeScript)               |
-| 3D / Shaders | [Three.js 0.184](https://threejs.org/) — custom GLSL CRT ShaderMaterial  |
-| Styling      | [Tailwind CSS v4](https://tailwindcss.com/)                              |
-| Icons        | [Bootstrap Icons](https://icons.getbootstrap.com/) (self-hosted woff2)   |
-| Font         | [VT323](https://fonts.google.com/specimen/VT323) via `next/font/google`  |
-| Deployment   | [Vercel](https://vercel.com/)                                            |
-| Analytics    | Vercel Analytics · Vercel Speed Insights · Google Analytics 4 (optional) |
+| Layer | Technology |
+|---|---|
+| Framework | [Next.js 15](https://nextjs.org/) (App Router, TypeScript) |
+| 3D / Shaders | [Three.js 0.184](https://threejs.org/) — custom GLSL CRT ShaderMaterial |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
+| Icons | [Bootstrap Icons](https://icons.getbootstrap.com/) (self-hosted woff2) |
+| Font | [VT323](https://fonts.google.com/specimen/VT323) via `next/font/google` |
+| Deployment | [Vercel](https://vercel.com/) |
+| Analytics | Vercel Analytics · Vercel Speed Insights · Google Analytics 4 (optional) |
 
 ---
 
-## Getting started
+## Getting Started
 
 ### Prerequisites
 
@@ -107,7 +135,7 @@ pnpm start
 
 ---
 
-## Making it your own
+## Making It Your Own
 
 There are three steps. You do not need to touch any component file.
 
@@ -115,21 +143,21 @@ There are three steps. You do not need to touch any component file.
 
 Open **`src/app/_config/owner.ts`** and fill in every field. Every comment explains what each field does and where it appears in the UI.
 
-| Field                           | What it affects                                                                  |
-| ------------------------------- | -------------------------------------------------------------------------------- |
-| `name` / `displayName`          | JSON-LD, SEO title, copyright line in the login animation                        |
-| `jobTitle`                      | SEO title, JSON-LD                                                               |
-| `bio`                           | Hidden SEO footer                                                                |
-| `siteUrl`                       | `robots.txt`, `sitemap.xml`, OpenGraph URL, social image URL                     |
-| `lang`                          | HTML `lang` attribute — set to your language code e.g. `"tr"`, `"de"`            |
-| `seoTitle`                      | Browser tab, search result heading, OpenGraph title                              |
-| `seoDescription`                | Search result snippet, OpenGraph description, Twitter card                       |
-| `github` / `linkedin` / `email` | JSON-LD `sameAs`, hidden SEO footer                                              |
-| `socialImage`                   | OpenGraph image, Twitter card image — place file at `/public/social-preview.png` |
-| `osName`                        | Auto-derived from your initials (e.g. `"JD-OS"`) — override if you prefer        |
-| `loginUsername`                 | Cosmetic username typed during the desktop login animation                       |
-| `gaId`                          | Google Analytics 4 measurement ID — leave `""` to disable                        |
-| `version`                       | Displayed in the OS status bar and boot sequence — see [Versioning](#versioning) |
+| Field | What it affects |
+|---|---|
+| `name` / `displayName` | JSON-LD, SEO title, copyright line in the login animation |
+| `jobTitle` | SEO title, JSON-LD |
+| `bio` | Hidden SEO footer |
+| `siteUrl` | `robots.txt`, `sitemap.xml`, OpenGraph URL, social image URL |
+| `lang` | HTML `lang` attribute — set to your language code e.g. `"tr"`, `"de"` |
+| `seoTitle` | Browser tab, search result heading, OpenGraph title |
+| `seoDescription` | Search result snippet, OpenGraph description, Twitter card |
+| `github` / `linkedin` / `email` | JSON-LD `sameAs`, hidden SEO footer |
+| `socialImage` | OpenGraph image, Twitter card image — place file at `/public/social-preview.png` |
+| `osName` | Auto-derived from your initials (e.g. `"JD-OS"`) — override if you prefer |
+| `loginUsername` | Cosmetic username typed during the desktop login animation |
+| `gaId` | Google Analytics 4 measurement ID — leave `""` to disable |
+| `version` | Displayed in the OS status bar and boot sequence — see [Versioning](#versioning) |
 
 ### Step 2 — Replace public assets
 
@@ -145,13 +173,11 @@ These files cannot be driven from `owner.ts` — replace them manually before go
 /public/favicon/android-chrome-512x512.png
 ```
 
-**Social preview image** — design a 1200 × 630 px image in any editor and save it as:
+**Social preview image** — design a 1200 × 630 px image and save it as:
 
 ```
 /public/social-preview.png
 ```
-
-This is shown when someone shares your link on Twitter/X, LinkedIn, Slack, iMessage, etc.
 
 **Desktop intro animation** — the 125 frames in `/public/render/` are the original creator's 3D render. Replace them with your own:
 
@@ -184,17 +210,6 @@ export const WINDOWS: WindowTemplate[] = [
           "What you build and what drives you.",
         ],
       },
-      {
-        subtitle: "Background",
-        body: [
-          "Current role @ Company (Year–Year).",
-          "Degree · University (Year).",
-        ],
-      },
-      {
-        subtitle: "Stack",
-        body: ["TypeScript · React · Node.js · (your stack)"],
-      },
     ],
   },
 ];
@@ -204,21 +219,19 @@ export const WINDOWS: WindowTemplate[] = [
 
 `src/app/_config/sections-library.ts` contains five ready-made templates: **PROJECTS**, **SKILLS**, **CONTACT**, **EXPERIENCE**, and **EDUCATION**.
 
-To add one, uncomment its import at the top of `portfolio.ts` and add it to `WINDOWS` and `MOBILE_NAV_ITEMS`:
-
 ```ts
 import { PROJECTS, SKILLS, CONTACT } from "./sections-library";
 
 export const WINDOWS: WindowTemplate[] = [
-  { id: "about", ... },   // your about section
+  { id: "about", ... },
   PROJECTS.window,
   SKILLS.window,
   CONTACT.window,
 ];
 
 export const MOBILE_NAV_ITEMS = [
-  { id: "home",    icon: "bi-house-fill",    label: "Home"     },
-  { id: "about",   icon: "bi-person-fill",   label: "About"    },
+  { id: "home",  icon: "bi-house-fill",  label: "Home"  },
+  { id: "about", icon: "bi-person-fill", label: "About" },
   PROJECTS.nav,
   SKILLS.nav,
   CONTACT.nav,
@@ -228,65 +241,64 @@ export const MOBILE_NAV_ITEMS = [
 Override any field by spreading:
 
 ```ts
-{
-  ...PROJECTS.window,
-  seeMoreLink: "https://github.com/your-username?tab=repositories",
-}
+{ ...PROJECTS.window, seeMoreLink: "https://github.com/your-username?tab=repositories" }
 ```
+
+#### Adding a second language
+
+Open `portfolio.ts` and fill in `WINDOWS_TR` (or your target language) with translated content. Then change:
+
+```ts
+export const AVAILABLE_LOCALES: Locale[] = ["en"]; // before
+export const AVAILABLE_LOCALES: Locale[] = ["en", "tr"]; // after — toggle appears automatically
+```
+
+The language toggle renders only when this array has two or more entries.
 
 #### Section links
 
 ```ts
 {
   subtitle: "My Project",
-  subtitleLink: "https://github.com/you/project",   // makes the heading a link
-  body: [
-    "A description of the project.",
-    "Built with TypeScript and React.",
-  ],
+  subtitleLink: "https://github.com/you/project",
+  body: ["Description.", "Built with TypeScript."],
   bodyLinks: [
-    { lineIndex: 1, url: "https://reactjs.org" },   // makes body[1] a link
+    { lineIndex: 1, url: "https://typescriptlang.org" },
   ],
 }
 ```
 
 #### Icons
 
-Two options for the `icon` field on any window or nav item:
-
 - **Bootstrap Icons class** — `"bi-person-fill"` — browse at [icons.getbootstrap.com](https://icons.getbootstrap.com)
-- **Custom image path** — `"/icons/star.svg"` — place the file in `/public/` and use the path starting with `/`
+- **Custom image path** — `"/icons/star.svg"` — place the file in `/public/`
 
 ---
 
 ## Versioning
 
-The version string is displayed in the OS status bar (mobile top bar and desktop glitch overlay) and in the boot/login sequence.
-
-Configure it in `owner.ts` under the `version` field.
+The version string appears in the OS status bar and the boot/login sequence.
 
 ### Option A — Manual (recommended)
-
-Set a version string directly:
 
 ```ts
 version: "1.0.0",
 ```
 
-Bump it whenever you deploy a meaningful update. Works in local dev and production. The build ID (short Git SHA) is set automatically by Vercel.
+Bump it whenever you deploy a meaningful update. The build ID (short Git SHA) is set automatically by Vercel.
 
-### Option B — Auto from commit count (advanced, deploy-only)
+### Option B — Auto from commit count (deploy-only)
 
-> ⚠ This does **not** work in local development. Locally the app will always show `v0.0.0 / unknown`. It only takes effect after a live Vercel deployment with the variables below configured.
+> ⚠ Does **not** work in local development. Shows `v0.0.0 / unknown` locally.
 
-Set `version: ""` in `owner.ts`, then configure these in your Vercel project's **Environment Variables** (build scope):
+Set `version: ""` in `owner.ts`, then add to Vercel **Environment Variables**:
 
-| Variable                                   | Description                                                                                              |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| `PORTFOLIO_REPO_OWNER`                     | Your GitHub username                                                                                     |
-| `PORTFOLIO_REPO_NAME`                      | Your repository name                                                                                     |
-| `PORTFOLIO_BASE_SHA`                       | The commit SHA to treat as `v0.0.0` — run `git log --oneline \| tail -1` to find your first commit's SHA |
-| `GITHUB_KEY` / `GITHUB_TOKEN` / `GH_TOKEN` | A GitHub fine-grained PAT with repository read access — mark as **Sensitive** in Vercel                  |
+| Variable | Description |
+|---|---|
+| `PORTFOLIO_REPO_OWNER` | Your GitHub username |
+| `PORTFOLIO_REPO_NAME` | Your repository name |
+| `PORTFOLIO_BASE_SHA` | Commit SHA to treat as `v0.0.0` — run `git log --oneline \| tail -1` |
+| `GITHUB_KEY` / `GITHUB_TOKEN` / `GH_TOKEN` | GitHub PAT with repository read access — mark as **Sensitive** |
 
 `VERCEL_GIT_COMMIT_SHA` is set automatically by Vercel.
 
@@ -297,15 +309,15 @@ Version scheme: 42 commits since base → `v0.4.2` · 123 commits → `v1.2.3`
 ## Deploying to Vercel
 
 1. Push your repo to GitHub
-2. Import the project at [vercel.com/new](https://vercel.com/new) — framework is detected automatically
-3. If using auto-versioning (Option B), add the environment variables listed above
+2. Import at [vercel.com/new](https://vercel.com/new) — framework is detected automatically
+3. If using auto-versioning, add the environment variables listed above
 4. Deploy
 
 The `vercel.json` at the repo root sets the framework to `nextjs` — no further configuration needed.
 
 ---
 
-## Project structure
+## Project Structure
 
 ```
 src/
@@ -320,14 +332,18 @@ src/
     │
     ├── _config/                # ← THE ONLY FOLDER YOU EDIT
     │   ├── owner.ts            # Identity, SEO, branding, versioning
-    │   ├── portfolio.ts        # Portfolio content (windows + nav items)
+    │   ├── portfolio.ts        # Portfolio content (windows + nav items + locale blocks)
     │   └── sections-library.ts # Ready-made section templates
+    │
+    ├── _i18n/
+    │   └── LocaleContext.tsx   # React Context + localStorage locale persistence
     │
     ├── _constants/
     │   └── version.ts          # Reads NEXT_PUBLIC_OS_* build-time env vars
     │
     ├── _components/
-    │   ├── CreditBar.tsx       # Fixed bottom credit bar (white → green after intro)
+    │   ├── CreditBar.tsx       # Fixed bottom credit bar
+    │   ├── LangToggle.tsx      # Fixed top-right language toggle (hidden if < 2 locales)
     │   └── WindowIcon.tsx      # Renders Bootstrap icon class OR /public image path
     │
     ├── (desktop)/
@@ -369,7 +385,7 @@ src/
 
 ---
 
-## Architecture notes
+## Architecture Notes
 
 ### Desktop rendering pipeline
 
@@ -386,16 +402,15 @@ The 2D canvas and WebGL canvas are entirely separate elements. This lets all dra
 
 ### Adaptive routing
 
-The `middleware.ts` file runs at Vercel's edge network before any serverless function is invoked. It inspects the `User-Agent` header and rewrites the root path `/` to either `/d` (desktop) or `/m` (mobile). The URL the user sees stays as `/`. Both target pages are fully static and served from the CDN cache.
-
-iPads are intentionally routed to desktop because iPadOS reports a desktop Safari user-agent.
+`middleware.ts` runs at Vercel's edge network before any serverless function. It inspects the `User-Agent` header and rewrites `/` to `/d` (desktop) or `/m` (mobile). iPads are routed to desktop because iPadOS reports a desktop Safari user-agent.
 
 ### Session and state persistence
 
-| Key in localStorage        | Content                        | TTL                                            |
-| -------------------------- | ------------------------------ | ---------------------------------------------- |
-| `{osName}-login-completed` | Timestamp (ms)                 | 10 minutes — boot animation skipped on revisit |
-| `{osName}-desktop-state`   | Window positions + focus order | Permanent — restored on next visit             |
+| Key in localStorage | Content | TTL |
+|---|---|---|
+| `{osName}-login-completed` | Timestamp (ms) | 10 minutes — boot animation skipped on revisit |
+| `{osName}-desktop-state` | Window positions + focus order | Permanent — restored on next visit |
+| `og-locale` | Selected locale (`"en"` / `"tr"`) | Permanent — language preference persisted |
 
 The storage key prefix is derived from `OWNER.osName`, so forks with different OS names never share each other's state.
 
@@ -405,204 +420,129 @@ The desktop experience renders entirely on `<canvas>`, which search engines cann
 
 ---
 
-## Customising the theme
+## Customising the Theme
 
-The CRT accent colour (`#00ff85`), background (`#0c0c0c`), font, and all derived RGBA variants live in:
+The CRT accent colour (`#00ff85`), background (`#0c0c0c`), and all derived RGBA variants live in:
 
 ```
 src/app/(desktop)/_constants/crt.ts
 ```
 
-Changing `ACCENT` and `BG` there will propagate to the desktop canvas. For the mobile side and global CSS utilities, update the matching values in `src/app/globals.css`.
+Changing `ACCENT` and `BG` there propagates to the desktop canvas. For the mobile side and global CSS utilities, update the matching values in `src/app/globals.css`.
 
 ---
 
-## Features
+## Changelog
 
-| Feature                   | Description                                                                                                                                     |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **CRT shader**            | Full WebGL post-processing pass: barrel distortion, scanlines, chromatic aberration, vignette, flicker, and rounded-corner masking              |
-| **Desktop OS simulation** | Draggable, closeable windows drawn on an offscreen 2D canvas, composited through the CRT material each frame                                    |
-| **Intro sequence**        | 125-frame WebP image sequence played back on a `<canvas>` with scroll-driven autoplay and a hardware-accelerated fade                           |
-| **Adaptive routing**      | Single root page detects viewport width and lazy-loads either the desktop or mobile experience; no JS is shipped for the unused branch          |
-| **Auto-versioning**       | Build version is derived at compile time from the GitHub Compare API (commit count since a base SHA) and embedded as env vars                   |
-| **Content-driven**        | All portfolio content lives in two files (`src/app/_config/owner.ts` and `src/app/_config/portfolio.ts`) — the only files you ever need to edit |
+> When you add a new feature, add a row to the [Features](#features) table **and** an entry here before merging.
 
----
+<details>
+<summary><b>v1.2.0</b> — Multi-language support</summary>
 
-## Tech Stack
+**Released:** 2026-06-18
 
-| Layer        | Technology                                                                      |
-| ------------ | ------------------------------------------------------------------------------- |
-| Framework    | [Next.js 15](https://nextjs.org/) (App Router)                                  |
-| Language     | TypeScript 5                                                                    |
-| 3D / Shaders | [Three.js](https://threejs.org/)                                                |
-| Styling      | [Tailwind CSS v4](https://tailwindcss.com/)                                     |
-| Icons        | [Bootstrap Icons](https://icons.getbootstrap.com/)                              |
-| Font         | [VT323](https://fonts.google.com/specimen/VT323) (Google Fonts via `next/font`) |
-| Deployment   | [Vercel](https://vercel.com/)                                                   |
+- Added `LocaleContext` — React Context + `localStorage` persistence for locale selection (`"og-locale"` key)
+- Added `LangToggle` — fixed top-right language toggle; renders only when `AVAILABLE_LOCALES` has 2+ entries, invisible otherwise
+- `portfolio.ts` now exports `WINDOWS_EN` / `WINDOWS_TR`, `getWindows(locale)`, `getMobileNavItems(locale)`, and `AVAILABLE_LOCALES`
+- Desktop canvas rebuilds window content on locale change via `buildWindowContent()` + `useEffect([locale])`
+- `IntroSequence` scroll hint text responds to locale ("SCROLL DOWN TO START" ↔ "BAŞLATMAK İÇİN AŞAĞI KAYDIRIN")
+- `LoginAnimation` boot lines, header, field labels, and auth messages all respond to locale
+- Mobile windows, nav labels, and window detail pages all respond to locale
+- Default `AVAILABLE_LOCALES: Locale[] = ["en"]` — toggle stays hidden until you add a second locale
 
----
+**How to add a language:**
+1. Fill in `WINDOWS_TR` (or your locale block) in `portfolio.ts`
+2. Add your locale to `AVAILABLE_LOCALES`
+3. The toggle appears automatically — no component changes needed
 
-## Project Structure
+</details>
 
-```
-src/app/
-├── _constants/
-│   └── version.ts          # Reads NEXT_PUBLIC_* build-time env vars
-├── _config/
-│   ├── owner.ts            # ← Identity, SEO, branding, version
-│   ├── portfolio.ts        # ← All portfolio content (windows, sections)
-│   └── sections-library.ts # Ready-made section templates to copy from
-├── (desktop)/
-│   ├── DesktopClient.tsx   # Phase state machine: scroll → loading → login → desktop
-│   ├── _components/
-│   │   ├── IntroSequence.tsx   # 125-frame scroll-driven canvas animation
-│   │   ├── LoadingAnimation.tsx
-│   │   ├── LoginAnimation.tsx  # Boot log + credential-typing animation
-│   │   └── crt/
-│   │       ├── index.tsx       # CRTScreen layout shell (sizing + overscan clip)
-│   │       ├── crtCanvas.ts    # useCRTCanvas hook — owns the Three.js render loop
-│   │       ├── material.ts     # CRT ShaderMaterial (GLSL vert + frag)
-│   │       └── renderer.ts     # WebGLRenderer factory
-│   ├── _constants/
-│   │   └── crt.ts          # Shared color tokens, glitch helpers, desktop layout metrics
-│   └── home/
-│       ├── canvas.ts       # All 2D drawing logic (windows, taskbar, hit-testing)
-│       └── page.tsx        # Desktop component — wires canvas.ts to useCRTCanvas
-├── (mobile)/
-│   ├── MobileClient.tsx    # Phase state machine: loading → login → home
-│   ├── _components/
-│   │   ├── BootAnimation.tsx   # Splash screen with progress bar
-│   │   ├── BottomBar.tsx       # Callback-driven bottom nav
-│   │   ├── LoadingAnimation.tsx
-│   │   ├── TopSection.tsx      # Status bar + animated clock widget
-│   │   └── WindowPage.tsx      # Renders a WINDOWS entry as mobile cards
-│   ├── _constants/
-│   │   └── ui.ts           # Timing, glow tokens, glitch stagger helpers
-│   └── home/
-│       └── page.tsx        # MobileHome — SPA view router + TeaserCard grid
-├── globals.css             # Tailwind v4 base, keyframes, cyber utility classes
-├── layout.tsx              # Root layout — font loading, metadata
-└── page.tsx                # Root page — viewport detection, lazy-loads correct client
-```
+<details>
+<summary><b>v1.1.0</b> — Window state persistence</summary>
+
+**Released:** earlier
+
+- Desktop window positions and open/close state saved to `localStorage`
+- State key namespaced to `OWNER.osName` to prevent cross-fork conflicts
+- Restored automatically on the next visit within the same browser
+
+</details>
+
+<details>
+<summary><b>v1.0.0</b> — Initial release</summary>
+
+**Released:** earlier
+
+- Desktop OS simulation with draggable windows on offscreen 2D canvas
+- WebGL CRT post-processing shader (barrel distortion, scanlines, chromatic aberration, vignette, flicker)
+- 125-frame scroll-driven intro animation
+- Retro boot log + credential-typing login animation
+- Mobile cyberpunk SPA with bottom nav, glitching clock, status bar
+- Adaptive routing via Vercel edge middleware
+- Two-file content configuration (`owner.ts` + `portfolio.ts`)
+- Auto-versioning from GitHub commit count
+- JSON-LD Person schema, OpenGraph, Twitter card, hidden SEO footer
+
+</details>
 
 ---
 
-## Getting Started
+## Roadmap
 
-### Prerequisites
+<div align="center">
 
-- Node.js ≥ 20
-- pnpm ≥ 9 (`npm i -g pnpm`)
+[![Roadmap](https://img.shields.io/badge/Status-Active_Development-00ff85?style=for-the-badge)]()
 
-### Install & run
+</div>
 
-```bash
-pnpm install
-pnpm dev
+### v1.x — Current
+
+- [x] Desktop OS simulation with WebGL CRT shader
+- [x] 125-frame scroll-driven intro sequence
+- [x] Retro boot log + login animation
+- [x] Mobile cyberpunk SPA
+- [x] Two-file content configuration
+- [x] Session + window state persistence
+- [x] Auto-versioning from commit count
+- [x] Multi-language support (EN / TR, extensible)
+
+### v2.0.0 — The 90s Era _(Planned)_
+
+> The big one. RetroFolio v2 introduces a second OS skin — a 90s-style desktop (think Windows 95 / Mac OS 8 aesthetics) — and lets visitors **upgrade their OS from within the website itself**.
+
+| Feature | Description |
+|---|---|
+| **90s OS skin** | New desktop UI: title bars, window chrome, icons, taskbar, and boot sequence styled after mid-90s operating systems |
+| **In-browser OS upgrade** | Visitors can trigger an "upgrade" animation that transitions from the 80s CRT experience to the new 90s UI — no page reload |
+| **New boot sequence** | Era-appropriate startup screen and sound for the 90s OS |
+| **90s icon set** | Pixel-art icons for windows and nav items |
+| **Era toggle persistence** | Chosen OS era saved to `localStorage` — the user's OS survives page refreshes |
+| **Config-driven** | Fork owners choose the default era in `owner.ts`; visitors can switch freely |
+
+<details>
+<summary>Show conceptual flow</summary>
+
+```
+User visits site
+  └─ Loads their saved OS era (80s default if first visit)
+       ├─ 80s era → current CRT experience (v1.x)
+       └─ 90s era → new 90s OS skin
+            └─ "Upgrade" button visible in desktop taskbar
+                 └─ Triggers upgrade animation: CRT flicker → progress bar → 90s boot
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-### Build
-
-```bash
-pnpm build
-pnpm start
-```
+</details>
 
 ---
 
-## Environment Variables
+<img src="https://capsule-render.vercel.app/api?type=waving&color=00ff85&height=80&section=footer" width="100%"/>
 
-Versioning is **fully optional** — the app shows `v0.0.0 / unknown` with no configuration at all.
+<div align="center">
 
-### Option A — Manual version (recommended)
+**Built with `</3` and too much caffeine.**
 
-Open `src/app/_config/owner.ts` and set the `version` field:
+[![Star on GitHub](https://img.shields.io/github/stars/OguzGurv2/RetroFolio?style=social)](https://github.com/OguzGurv2/RetroFolio)
 
-```ts
-version: "1.0.0",
-```
+MIT License — see [LICENSE](LICENSE) for details.
 
-That's it. The build ID is taken from the Git commit SHA automatically (Vercel sets `VERCEL_GIT_COMMIT_SHA`).
-
-### Option B — Auto version from commit count
-
-Set `version: ""` in `owner.ts` and add these to your Vercel **environment variables**:
-
-| Variable                                   | Description                                                                                                 |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `PORTFOLIO_REPO_OWNER`                     | Your GitHub username                                                                                        |
-| `PORTFOLIO_REPO_NAME`                      | Your repository name                                                                                        |
-| `PORTFOLIO_BASE_SHA`                       | Commit SHA to treat as `v0.0.0` — every commit after it increments the version (e.g. 42 commits → `v0.4.2`) |
-| `GITHUB_KEY` / `GITHUB_TOKEN` / `GH_TOKEN` | GitHub PAT with `repo` read scope — store as a **Vercel secret**                                            |
-
-`VERCEL_GIT_COMMIT_SHA` is set automatically by Vercel.
-
-### Internal variables (set by `next.config.ts` — do not set manually)
-
-| Variable                  | Description                                 |
-| ------------------------- | ------------------------------------------- |
-| `NEXT_PUBLIC_OS_VERSION`  | Version string passed to the browser bundle |
-| `NEXT_PUBLIC_OS_BUILD_ID` | Short Git SHA passed to the browser bundle  |
-
----
-
-## Updating Portfolio Content
-
-Everything is driven from **`src/app/_config/owner.ts`** (identity, SEO, version) and **`src/app/_config/portfolio.ts`** (windows, sections).  
-No component files need to be touched for content changes.
-
-```ts
-// Add or edit a window entry:
-{
-  id: "projects",        // Unique ID — used for routing and state
-  title: "PROJECTS.exe", // Titlebar text on desktop
-  icon: "bi-folder2-open", // Bootstrap icon for mobile cards and nav
-  sections: [
-    {
-      subtitle: "My Project",
-      subtitleLink: "https://github.com/...", // Optional — makes subtitle a link
-      body: ["Description line 1.", "Description line 2."],
-      bodyLinks: [
-        { lineIndex: 0, url: "https://..." }, // Makes body[0] a link
-      ],
-    },
-  ],
-}
-```
-
-To add a new window to the **mobile bottom nav** as well, add a matching entry to `MOBILE_NAV_ITEMS` in the same file.
-
----
-
-## Architecture Notes
-
-### Desktop rendering pipeline
-
-```
-React state (phase)
-  └─ useCRTCanvas (hook)
-       ├─ Offscreen 2D canvas  ←  canvas.ts draws here every frame
-       ├─ THREE.CanvasTexture   ←  uploaded to GPU each frame
-       └─ ShaderMaterial (CRT)  →  rendered to visible WebGL canvas
-```
-
-The 2D canvas and the WebGL canvas are separate elements. This lets the drawing code use the familiar Canvas 2D API while still getting the full CRT post-processing pass.
-
-### Mobile navigation
-
-The mobile experience is a **fully client-side SPA** — there are no sub-route pages. The `BottomNav` component only operates in callback mode; `MobileHome` owns all view state.
-
-### Login skip / session persistence
-
-Both desktop and mobile store a timestamp in `localStorage` when login completes.  
-On the next visit, if the timestamp is within 10 minutes, the boot animation is skipped and the user lands directly on the home view.
-
----
-
-## License
-
-MIT — see [LICENSE](LICENSE) for details.
+</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "@/_i18n/LocaleContext";
 
 /**
  * ═════════════════════════════════════════════════════════════════════════════
@@ -162,9 +163,11 @@ function drawFrameToCanvas(
  * Tells the user to scroll to start the animation.
  */
 function IntroPrompt() {
+  const { locale } = useLocale();
+  const hint = locale === "tr" ? "BAŞLATMAK İÇİN AŞAĞI KAYDIRIN" : "SCROLL DOWN TO START";
   return (
     <div className={hintClassName}>
-      <p className={hintTextClassName}>SCROLL DOWN TO START</p>
+      <p className={hintTextClassName}>{hint}</p>
       <div className={hintIconsClassName}>
         <i
           className={`bi bi-chevron-compact-up ${hintChevronClassName} ${hintChevronUpClassName}`}

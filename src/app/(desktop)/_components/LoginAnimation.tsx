@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useLocale } from "@/_i18n/LocaleContext";
 import CRTScreen from "./crt";
 import { useCRTCanvas } from "./crt/crtCanvas";
 import {
@@ -39,17 +40,6 @@ const TYPE_CURSOR_PULSE_MS = 150; // Cursor visible briefly after each typed cha
 const AUTH_MESSAGE_DELAY = 340; // Milliseconds between auth status updates
 const LOGIN_COMPLETE_DELAY = 700; // Pause before calling onLogin()
 
-// ─ Content displayed during boot sequence
-const SYSTEM_LINES = [
-  `${OWNER.osName}  v${OS_VERSION}  [${OS_BUILD_ID}]`,
-  `Copyright (C) ${OWNER.name}. All rights reserved.`,
-  "",
-  "Checking system integrity........  OK",
-  "Loading user profiles..............  OK",
-  "Initialising display adapter.......  OK",
-  "",
-];
-
 // Only these boot rows run idle glitch; keep the rest stable for readability.
 const BOOT_GLITCH_LINE_INDEXES = new Set([0, 3, 5]);
 
@@ -57,15 +47,54 @@ const BOOT_GLITCH_LINE_INDEXES = new Set([0, 3, 5]);
 const USERNAME = OWNER.loginUsername;
 const PASSWORD = "••••••••";
 
-// ─ Status messages shown during authentication phase
-const AUTH_MESSAGES = [
-  "Authenticating",
-  "Authenticating.",
-  "Authenticating..",
-  "Authenticating...",
-  "Verifying credentials...",
-  "Access granted.",
-];
+// ─ Locale-specific strings ────────────────────────────────────────────────────
+
+const LOGIN_STRINGS = {
+  en: {
+    systemLines: [
+      `${OWNER.osName}  v${OS_VERSION}  [${OS_BUILD_ID}]`,
+      `Copyright (C) ${OWNER.name}. All rights reserved.`,
+      "",
+      "Checking system integrity........  OK",
+      "Loading user profiles..............  OK",
+      "Initialising display adapter.......  OK",
+      "",
+    ],
+    header: "── USER IDENTIFICATION ──",
+    usernameLabel: "USERNAME",
+    passwordLabel: "PASSWORD",
+    authMessages: [
+      "Authenticating",
+      "Authenticating.",
+      "Authenticating..",
+      "Authenticating...",
+      "Verifying credentials...",
+      "Access granted.",
+    ],
+  },
+  tr: {
+    systemLines: [
+      `${OWNER.osName}  v${OS_VERSION}  [${OS_BUILD_ID}]`,
+      `Telif Hakkı (C) ${OWNER.name}. Tüm hakları saklıdır.`,
+      "",
+      "Sistem bütünlüğü kontrol ediliyor...  TAMAM",
+      "Kullanıcı profilleri yükleniyor.....  TAMAM",
+      "Ekran adaptörü başlatılıyor.........  TAMAM",
+      "",
+    ],
+    header: "── KULLANICI DOĞRULAMA ──",
+    usernameLabel: "KULLANICI",
+    passwordLabel: "ŞİFRE",
+    authMessages: [
+      "Doğrulanıyor",
+      "Doğrulanıyor.",
+      "Doğrulanıyor..",
+      "Doğrulanıyor...",
+      "Kimlik bilgileri doğrulanıyor...",
+      "Erişim izni verildi.",
+    ],
+  },
+};
 
 /**
  * ═════════════════════════════════════════════════════════════════════════════
@@ -97,6 +126,9 @@ type Phase = "boot" | "show" | "type" | "auth";
  */
 
 export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanClass }: LoginScreenProps) {
+  const { locale } = useLocale();
+  const strings = LOGIN_STRINGS[locale] ?? LOGIN_STRINGS.en;
+
   /**
    * ─────────────────────────────────────────────────────────────────────────
    * STATE: Component state drives the animation sequence
@@ -135,14 +167,14 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
   useEffect(() => {
     if (phase !== "boot") return;
 
-    if (bootLine >= SYSTEM_LINES.length) {
+    if (bootLine >= strings.systemLines.length) {
       // Boot sequence complete → transition to login form
       const t = setTimeout(() => setPhase("show"), TRANSITION_TO_TYPE_MS);
       return () => clearTimeout(t);
     }
 
     // Empty lines have shorter delay (smoother appearance)
-    const delay = SYSTEM_LINES[bootLine] === "" ? BOOT_LINE_DELAY_EMPTY : BOOT_LINE_DELAY_FILLED;
+    const delay = strings.systemLines[bootLine] === "" ? BOOT_LINE_DELAY_EMPTY : BOOT_LINE_DELAY_FILLED;
     const t = setTimeout(() => setBootLine((n) => n + 1), delay);
     return () => clearTimeout(t);
   }, [phase, bootLine]);
@@ -200,7 +232,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
   useEffect(() => {
     if (phase !== "auth") return;
 
-    if (authIndex < AUTH_MESSAGES.length - 1) {
+    if (authIndex < strings.authMessages.length - 1) {
       // Show next auth message
       const t = setTimeout(() => setAuthIndex((n) => n + 1), AUTH_MESSAGE_DELAY);
       return () => clearTimeout(t);
@@ -225,13 +257,13 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
    * Store animation state in a ref to avoid stale closures in the render loop.
    * Returns from useEffect's callback need consistent access to current state values.
    */
-  const stateRef = useRef({ phase, bootLine, typedUser, typedPass, authIndex, lastTypeAt });
+  const stateRef = useRef({ phase, bootLine, typedUser, typedPass, authIndex, lastTypeAt, strings });
   useEffect(() => {
-    stateRef.current = { phase, bootLine, typedUser, typedPass, authIndex, lastTypeAt };
+    stateRef.current = { phase, bootLine, typedUser, typedPass, authIndex, lastTypeAt, strings };
   });
 
   useCRTCanvas(canvasRef, (ctx, w, h, t) => {
-    const { phase: ph, bootLine: bl, typedUser: tu, typedPass: tp, authIndex: ai, lastTypeAt: lta } = stateRef.current;
+    const { phase: ph, bootLine: bl, typedUser: tu, typedPass: tp, authIndex: ai, lastTypeAt: lta, strings: s } = stateRef.current;
 
     /**
      * ───────────────────────────────────────────────────────────────────────
@@ -280,7 +312,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
     // Draw border around boot log
     ctx.strokeStyle = ACCENT_RGBA_40;
     ctx.lineWidth = 1;
-    ctx.strokeRect(panelX, boxY, panelW, (SYSTEM_LINES.length + 1) * lh + boxPy * 2);
+    ctx.strokeRect(panelX, boxY, panelW, (s.systemLines.length + 1) * lh + boxPy * 2);
 
     // Draw each line of the boot sequence (up to current line)
     ctx.font = `${sz17}px ${FONT}`;
@@ -291,7 +323,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
     // Calculate cumulative delay for each line to stagger glitch animations
     let cumulativeDelay = 0; // in milliseconds
     for (let i = 0; i < bl; i++) {
-      const line = SYSTEM_LINES[i];
+      const line = s.systemLines[i];
       
       // Calculate how long this line has been visible (in seconds)
       const timeSinceLineAppeared = (t * 1000 - cumulativeDelay) / 1000;
@@ -317,7 +349,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
 
     if (ph !== "boot") {
       // Position login section below boot log
-      const loginY = boxY + (SYSTEM_LINES.length + 2) * lh + boxPy * 2 + Math.round(lh * 0.8);
+      const loginY = boxY + (s.systemLines.length + 2) * lh + boxPy * 2 + Math.round(lh * 0.8);
 
       // Draw section header with staggered glitch (header appears first after boot)
       ctx.font = `${sz20}px ${FONT}`;
@@ -325,7 +357,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
       ctx.shadowBlur = 6;
       ctx.shadowColor = ACCENT_RGBA_30;
       const headerGlitchPhase = getGlitchIdlePhase(Math.max(0, t - TRANSITION_TO_TYPE_MS / 1000));
-      glitchText(ctx, "\u2500\u2500 USER IDENTIFICATION \u2500\u2500", panelX, loginY, ACCENT_RGBA_60, headerGlitchPhase);
+      glitchText(ctx, s.header, panelX, loginY, ACCENT_RGBA_60, headerGlitchPhase);
       ctx.shadowBlur = 0;
 
       // Calculate row positions for input fields
@@ -341,7 +373,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
        * Shows: "USERNAME: [typed_username][cursor]"
        */
       ctx.font = `${sz20}px ${FONT}`;
-      glitchText(ctx, "USERNAME", panelX, row1Y, ACCENT_RGBA_70, usernameGlitchPhase);
+      glitchText(ctx, s.usernameLabel, panelX, row1Y, ACCENT_RGBA_70, usernameGlitchPhase);
       glitchText(ctx, ":", panelX + labelW, row1Y, ACCENT_RGBA_40, usernameGlitchPhase);
       ctx.fillStyle = ACCENT;
       ctx.shadowBlur = 8;
@@ -368,7 +400,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
        * Shows: "PASSWORD: [typed_password][cursor]"
        * Password displays as bullet points (••••••••)
        */
-      glitchText(ctx, "PASSWORD", panelX, row2Y, ACCENT_RGBA_70, passwordGlitchPhase);
+      glitchText(ctx, s.passwordLabel, panelX, row2Y, ACCENT_RGBA_70, passwordGlitchPhase);
       glitchText(ctx, ":", panelX + labelW, row2Y, ACCENT_RGBA_40, passwordGlitchPhase);
       ctx.shadowBlur = 8;
       glitchText(ctx, tp, panelX + labelW + Math.round(lh * 0.6), row2Y, ACCENT, passwordGlitchPhase);
@@ -394,7 +426,7 @@ export default function LoginScreen({ onLogin, radTopPct, radBotPct, overscanCla
       if (ph === "auth") {
         const authGlitchPhase = getGlitchIdlePhase(Math.max(0, t - (TRANSITION_TO_TYPE_MS + PAUSE_BEFORE_TYPE_MS + TRANSITION_TO_AUTH_MS) / 1000));
         ctx.font = `${sz17}px ${FONT}`;
-        glitchText(ctx, AUTH_MESSAGES[ai], panelX, row2Y + lh * 1.6, ACCENT, authGlitchPhase);
+        glitchText(ctx, s.authMessages[ai], panelX, row2Y + lh * 1.6, ACCENT, authGlitchPhase);
       }
     }
   }, [], radTopPct, radBotPct);

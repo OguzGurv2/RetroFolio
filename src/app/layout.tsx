@@ -5,7 +5,9 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import CreditBar from "./_components/CreditBar";
-import { WINDOWS } from "./_config/portfolio";
+import LangToggle from "./_components/LangToggle";
+import { LocaleProvider } from "./_i18n/LocaleContext";
+import { WINDOWS, AVAILABLE_LOCALES } from "./_config/portfolio";
 import { OWNER } from "./_config/owner";
 
 const vt323 = VT323({
@@ -82,9 +84,11 @@ export default function RootLayout({
         />
       </head>
       <body className={vt323.variable}>
-        {children}
+        <LocaleProvider>
+          {children}
 
-        <CreditBar />
+          <CreditBar />
+          <LangToggle availableLocales={AVAILABLE_LOCALES} />
 
         {/*
           Visually hidden semantic content for search engine crawlers.
@@ -150,6 +154,7 @@ export default function RootLayout({
         <SpeedInsights />
         {/* Google Analytics — loads after all resources so it never affects LCP/FCP */}
         {OWNER.gaId ? <GoogleAnalytics gaId={OWNER.gaId} /> : null}
+        </LocaleProvider>
       </body>
     </html>
   );

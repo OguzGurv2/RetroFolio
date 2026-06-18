@@ -501,7 +501,7 @@ function wrapByCharLimit(text: string, maxChars: number): string[] {
   return lines;
 }
 
-function buildWindowContent(template: DesktopWindowTemplate): {
+export function buildWindowContent(template: DesktopWindowTemplate): {
   lines: Array<[string, string]>;
   subtitleLinks: SubtitleLinkMeta[];
   bodyLinks: BodyLinkMeta[];
@@ -560,7 +560,7 @@ function buildWindowContent(template: DesktopWindowTemplate): {
 
   // "See more" link — rendered as a linked subtitle at the very bottom.
   if (template.seeMoreLink) {
-    const label = "See more repositories";
+    const label = template.seeMoreLabel ?? "See more repositories";
     const lineIndex = lines.length;
     lines.push([label, ACCENT]);
     subtitleLinks.push({ lineIndex, text: label, url: template.seeMoreLink });
@@ -598,9 +598,9 @@ export function loadDesktopState(): { wins: Partial<DesktopWindow>[]; focusOrder
   }
 }
 
-export function createInitialWindows(): DesktopWindow[] {
+export function createInitialWindows(templates: DesktopWindowTemplate[] = INITIAL_WINDOWS): DesktopWindow[] {
   const cached = loadDesktopState();
-  const initialWins = INITIAL_WINDOWS.map((template, index) => {
+  const initialWins = templates.map((template, index) => {
     const isFirst = index === 0;
     const autoPos = getAutoWindowPosition(index);
     const content = buildWindowContent(template);
@@ -627,7 +627,7 @@ export function createInitialWindows(): DesktopWindow[] {
   }
 
   return initialWins.map((win) => {
-    const template = INITIAL_WINDOWS.find((item) => item.id === win.id);
+    const template = templates.find((item) => item.id === win.id);
     const cachedWin = cached.wins.find((cw) => cw.id === win.id);
 
     // Explicit template visibility should win over cached visibility.

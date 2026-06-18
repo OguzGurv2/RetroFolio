@@ -36,6 +36,8 @@
 
 // import { PROJECTS, SKILLS, CONTACT, EXPERIENCE, EDUCATION } from "./sections-library";
 
+import type { Locale } from "@/_i18n/LocaleContext";
+
 // ─ Types ─────────────────────────────────────────────────────────────────────
 
 export interface WindowSection {
@@ -77,6 +79,8 @@ export interface WindowTemplate {
    * Useful for linking to a full GitHub profile, CV, etc.
    */
   seeMoreLink?: string;
+  /** Label for the "see more" link. Defaults to "See more repositories". */
+  seeMoreLabel?: string;
 }
 
 // =============================================================================
@@ -152,3 +156,76 @@ export const MOBILE_NAV_ITEMS = [
   // PROJECTS.nav,
   // SKILLS.nav,
 ] as const; // `as const` makes TypeScript infer the exact id values — do not remove it
+
+// =============================================================================
+//  TURKISH TRANSLATIONS
+// =============================================================================
+//
+//  Fill in your Turkish content below. The structure mirrors WINDOWS and
+//  MOBILE_NAV_ITEMS above — just translate the text values.
+//  Any section you don't translate will fall back to the English version.
+//
+// =============================================================================
+
+const WINDOWS_TR: WindowTemplate[] = [
+  // ---------------------------------------------------------------------------
+  //  Translate your ABOUT section here
+  // ---------------------------------------------------------------------------
+  {
+    id: "about",
+    title: "HAKKIMDA.exe",
+    icon: "bi-person-fill",
+    initiallyOpen: true,
+    sections: [
+      {
+        subtitle: "Ben Kimim?",
+        body: [
+          "Rolünüz ve konumunuz — ör. Londra merkezli Full-stack geliştirici.",
+          "Ne inşa ettiğinizi ve sizi neyin motive ettiğini anlatan bir cümle.",
+        ],
+      },
+      {
+        subtitle: "Geçmiş",
+        body: [
+          "Mevcut veya son pozisyon @ Şirket (Yıl–Yıl).",
+          "Derece · Üniversite Adı (Yıl).",
+          "Önceki deneyim veya staj @ Şirket (Yıl).",
+        ],
+      },
+      {
+        subtitle: "Teknolojiler",
+        body: ["Dil · Framework · Araç · (kendininkini ekle)"],
+      },
+    ],
+  },
+
+  // ---------------------------------------------------------------------------
+  //  Add translations for your other sections here, e.g.:
+  //
+  //   { ...PROJECTS.window, title: "PROJELER.exe", seeMoreLabel: "Daha fazla depo", sections: [...] },
+  //   { ...SKILLS.window,   title: "YETENEKLER.exe", sections: [...] },
+  //   { ...CONTACT.window,  title: "İLETİŞİM.exe", sections: [...] },
+  // ---------------------------------------------------------------------------
+];
+
+const MOBILE_NAV_TR = [
+  { id: "about", icon: "bi-person-fill", label: "Hakkımda"  },
+  { id: "home",  icon: "bi-house-fill",  label: "Ana Sayfa" },
+  // Add more translated nav items here to match your MOBILE_NAV_ITEMS above.
+] as const;
+
+// ─ Available locales ─────────────────────────────────────────────────────────
+// Add "tr" here (and fill in the Turkish content above) to enable the language
+// toggle. LangToggle only renders when this array has 2+ entries.
+
+export const AVAILABLE_LOCALES: Locale[] = ["en"]; // add "tr" when your translation is ready
+
+// ─ Locale-aware getters ───────────────────────────────────────────────────────
+
+export function getWindows(locale: Locale): WindowTemplate[] {
+  return locale === "tr" ? WINDOWS_TR : WINDOWS;
+}
+
+export function getMobileNavItems(locale: Locale) {
+  return locale === "tr" ? MOBILE_NAV_TR : MOBILE_NAV_ITEMS;
+}

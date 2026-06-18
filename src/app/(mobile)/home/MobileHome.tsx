@@ -6,7 +6,8 @@ import { TopBar }  from "@/(mobile)/_components/TopBar";
 import { Clock }   from "@/(mobile)/_components/Clock";
 import { BottomNav }     from "@/(mobile)/_components/BottomBar";
 import { WindowContent } from "@/(mobile)/_components/WindowPage";
-import { WINDOWS, type WindowTemplate } from "@/_config/portfolio";
+import { getWindows, type WindowTemplate } from "@/_config/portfolio";
+import { useLocale } from "@/_i18n/LocaleContext";
 import { glitchIdleStyle } from "@/(mobile)/_constants/ui";
 import WindowIcon from "@/_components/WindowIcon";
 
@@ -59,6 +60,8 @@ function TeaserCard({ win, index, onOpen }: { win: WindowTemplate; index: number
 }
 
 export default function MobileHome() {
+  const { locale } = useLocale();
+  const WINDOWS = getWindows(locale);
   const [view, setView] = useState<ViewId>("home");
   const [animState, setAnimState] = useState<AnimState>("idle");
   const [direction, setDirection] = useState<Direction>("ltr");

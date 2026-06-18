@@ -4,9 +4,10 @@ import { useEffect, useRef } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import { useCRTCanvas } from "@/(desktop)/_components/crt/crtCanvas";
 import CRTScreen from "@/(desktop)/_components/crt";
-import { BARREL_K } from "@/(desktop)/_constants/crt";
+import { BARREL_K, GLITCH_CYCLE } from "@/(desktop)/_constants/crt";
 import {
   TASKBAR_HEIGHT,
+  buildWindowContent,
   closeButtonRect,
   createInitialWindows,
   drawDesktopFrame,
@@ -21,12 +22,15 @@ import {
   taskbarButtonRects,
   titlebarRect,
 } from "./canvas";
+import { useLocale } from "@/_i18n/LocaleContext";
+import { getWindows } from "@/_config/portfolio";
 
 export default function Desktop() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { locale } = useLocale();
 
   // Mutable runtime state is stored in refs to avoid React re-renders on mouse move.
-  const winsRef = useRef(createInitialWindows());
+  const winsRef = useRef(createInitialWindows(getWindows(locale)));
   const focusOrderRef = useRef<string[]>(loadDesktopState()?.focusOrder ?? winsRef.current.map((w) => w.id));
   const clockRef = useRef(new Date().toLocaleTimeString());
   const hoverBtnRef = useRef<string | null>(null);
@@ -40,6 +44,23 @@ export default function Desktop() {
     }, 1000);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    const templates = getWindows(locale);
+    winsRef.current = winsRef.current.map((win) => {
+      const template = templates.find((t) => t.id === win.id);
+      if (!template) return win;
+      const content = buildWindowContent(template);
+      return {
+        ...win,
+        title: template.title,
+        lines: content.lines,
+        subtitleLinks: content.subtitleLinks,
+        bodyLinks: content.bodyLinks,
+        lineGlitchOffsets: content.lines.map(() => Math.random() * GLITCH_CYCLE),
+      };
+    });
+  }, [locale]);
 
   useEffect(() => {
     const saveInterval = setInterval(() => {
