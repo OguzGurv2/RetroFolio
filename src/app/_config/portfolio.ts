@@ -9,7 +9,7 @@
 //    • SEO      — hidden HTML for search-engine crawlers
 //
 //  ┌─ QUICK START ────────────────────────────────────────────────────────────┐
-//  │  1. Edit the ABOUT section below — it is the only mandatory section.    │
+//  │  1. Edit the ABOUT section below — it is the only mandatory section.     │
 //  │  2. Uncomment any pre-made sections from sections-library.ts you want.   │
 //  │  3. Add a matching nav item in MOBILE_NAV_ITEMS for each section.        │
 //  │  4. Done — no component files need touching.                             │
@@ -52,6 +52,8 @@ export interface WindowSection {
    * `lineIndex` is the 0-based index of the line inside `body`.
    */
   bodyLinks?: Array<{ lineIndex: number; url: string }>;
+  /** Optional live demo URL — renders a "Live Demo ↗" button below the body. */
+  liveDemoLink?: string;
 }
 
 export interface WindowTemplate {

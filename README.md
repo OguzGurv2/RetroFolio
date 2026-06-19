@@ -15,14 +15,20 @@
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-00ff85?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.1.0-00ff85?style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-1.1.1-00ff85?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-00ff85?style=flat-square)](https://github.com/OguzGurv2/RetroFolio/pulls)
 
 </div>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=00ff85&height=80&section=header" width="100%"/>
 
-## What's New? — v1.1.0
+## What's New? — v1.1.1
+
+> **Live demo links for projects.** Add `liveDemoLink: "https://..."` to any project section in `portfolio.ts` — a clickable "▶ Live Demo ↗" link appears below the description on both mobile and desktop. Optional; sections without it are unaffected.
+
+---
+
+## v1.1.0
 
 > **Multi-language support is here.** The entire UI now responds to locale changes instantly — windows, nav labels, boot sequence, login animation, and the intro hint all switch without a page reload. A subtle fixed toggle appears in the top-right corner, but **only when you configure 2 or more languages** — single-language setups see nothing.
 
@@ -450,6 +456,17 @@ Changing `ACCENT` and `BG` there propagates to the desktop canvas. For the mobil
 ## Changelog
 
 > When you add a new feature, add a row to the [Features](#features) table **and** an entry here before merging.
+
+<details>
+<summary><b>v1.1.1</b> — Live demo links</summary>
+
+**Released:** 2026-06-19
+
+- Added `liveDemoLink?: string` to `WindowSection` — optional field, no impact on sections that omit it
+- Mobile: renders a `▶ Live Demo ↗` link below the body text when set
+- Desktop: appends a clickable `▶ Live Demo` body line with the same hover-underline treatment as other body links
+
+</details>
 
 <details>
 <summary><b>v1.1.0</b> — Multi-language support</summary>

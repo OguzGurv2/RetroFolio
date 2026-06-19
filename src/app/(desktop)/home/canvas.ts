@@ -544,6 +544,12 @@ export function buildWindowContent(template: DesktopWindowTemplate): {
       bodyLineIndexInSection++;
     }
 
+    if (section.liveDemoLink) {
+      const liveDemoLineIndex = lines.length;
+      lines.push(["▶ Live Demo", ACCENT_RGBA_80]);
+      bodyLinks.push({ lineIndex: liveDemoLineIndex, text: "▶ Live Demo", url: section.liveDemoLink });
+    }
+
     if (sectionIndex < template.sections.length - 1) {
       for (let i = 0; i < SECTION_SPACER_LINES; i++) {
         lines.push(["", ""]);

@@ -41,6 +41,17 @@ function SectionCard({ section, index }: { section: WindowTemplate["sections"][n
             <p key={i} className="cyber-dim text-[14px] leading-relaxed">{line}</p>
           );
         })}
+        {section.liveDemoLink && (
+          <Link
+            href={section.liveDemoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sendGAEvent("event", "link_click", { url: section.liveDemoLink!, label: "live_demo" })}
+            className="cyber-dim text-[14px] leading-relaxed block underline decoration-[rgba(0,200,140,0.4)] underline-offset-2 mt-1"
+          >
+            ▶ Live Demo ↗
+          </Link>
+        )}
       </div>
     </div>
   );
