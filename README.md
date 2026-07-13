@@ -526,6 +526,7 @@ Changing `ACCENT` and `BG` there propagates to the desktop canvas. For the mobil
 - [x] Session + window state persistence
 - [x] Auto-versioning from commit count
 - [x] Multi-language support (EN / TR, extensible)
+- [ ] Better animations for windows in desktop
 
 ### v2.0.0 — The 90s Era _(Planned)_
 
